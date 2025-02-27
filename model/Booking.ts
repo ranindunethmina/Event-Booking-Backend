@@ -1,7 +1,7 @@
-export default interface Booking {
-  bookingId: string;
-  customerId: string;
-  eventId: string;
-  status: "PENDING" | "CONFIRMED" | "CANCELLED" | null;
-  totalAmount: number;
+export default class Booking {
+  BookingId!: number;
+  CustomerId!: number;
+  EventId!: number;
+  Status!: "PENDING" | "CONFIRMED" | "CANCELLED" | null;
+  TotalAmount!: number;
 }

@@ -1,10 +1,10 @@
-export default interface Event {
-    eventId: string;
-    title: string;
-    description: string;
-    location: string;
-    eventDate: Date;
-    ticketPrice: number;
-    totalTickets: number;
-    availableTickets: number;
+export default class Event {
+    EventId!: number;
+    Title!: string;
+    Description!: string;
+    Location!: string;
+    EventDate!: string;
+    TicketPrice!: number;
+    TotalTickets!: number;
+    AvailableTickets!: number;
 }

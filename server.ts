@@ -1,36 +1,22 @@
 import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import authRoutes from "./router/auth-router";
-import bookingRoutes from "./router/booking-routes";
 import eventRoutes from "./router/event-routes";
-import userRoutes from "./router/customer-routes";
-
-dotenv.config();
+import bookingRoutes from "./router/booking-routes";
+import customerRoutes from "./router/customer-routes";
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-app.use(cors());
 app.use(express.json());
+app.use('/',(req,res,next)=>{
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, content-type');
 
-declare module 'express' {
-    interface Request {
-        user?: any;
-    }
-}
+    next();
+})
+app.use("/event", eventRoutes);
+app.use("/booking", bookingRoutes)
+app.use("/customer", customerRoutes)
 
-app.use("/api/auth", authRoutes);
-app.use("/api/customer", userRoutes);
-app.use("/api/events", eventRoutes);
-app.use("/api/bookings", bookingRoutes);
-
-// app.use(errorHandler);
-
-app.get('/', (req, res) => {
-    res.send('Hello from the backend!');
-});
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+app.listen(3000, (err=>{
+    console.log("Server running on port 3000");
+}));
